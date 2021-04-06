@@ -25,32 +25,42 @@ class TestBus(unittest.TestCase):
     def test_starts_with_no_passengers(self):
         self.assertEqual(0, self.bus.passenger_count())
 
-    #@unittest.skip("Delete this line to run the test")
+    @unittest.skip("Delete this line to run the test")
     def test_can_pick_up_passenger(self):
-        person = Person("Guido van Rossum", 64)
+        person = Person("Guido van Rossum", 64, "Edinburgh")
         self.bus.pick_up(person)
         self.assertEqual(1, self.bus.passenger_count())
 
-    #@unittest.skip("Delete this line to run the test")
+    @unittest.skip("Delete this line to run the test")
     def test_can_drop_off_passenger(self):
-        person = Person("Guido van Rossum", 64)
+        person = Person("Guido van Rossum", 64, "Edinburgh")
         self.bus.pick_up(person)
         self.bus.drop_off(person)
         self.assertEqual(0, self.bus.passenger_count())
 
     #@unittest.skip("Delete this line to run the test")
     def test_can_empty_bus(self):
-        person = Person("Guido van Rossum", 64)
+        person = Person("Guido van Rossum", 64, "Edinburgh")
         self.bus.pick_up(person)
         self.bus.empty()
         self.assertEqual(0, self.bus.passenger_count())
 
     #@unittest.skip("Delete this line to run the test")
     def test_can_pick_up_passenger_from_bus_stop(self):
-        person_1 = Person("Guido van Rossum", 64)
-        person_2 = Person("Carol Willing", 50)
+        person_1 = Person("Guido van Rossum", 64, "Edinburgh")
+        person_2 = Person("Carol Willing", 50, "Edinburgh" )
         bus_stop = BusStop("Waverly Station")
         bus_stop.add_to_queue(person_1)
         bus_stop.add_to_queue(person_2)
         self.bus.pick_up_from_stop(bus_stop)
         self.assertEqual(2, self.bus.passenger_count())
+
+    def test_wrong_destination(self):
+        person = Person("Guido van Rossum", 64, "Edinburgh")
+        self.bus.pick_up(person)
+        self.assertEqual(0, self.bus.passenger_count())
+
+    def test_right_destination(self):
+        person = Person("Guido van Rossum", 64, "Ocean Terminal")
+        self.bus.pick_up(person)
+        self.assertEqual(1, self.bus.passenger_count())

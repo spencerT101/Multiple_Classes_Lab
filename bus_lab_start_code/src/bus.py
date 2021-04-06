@@ -14,7 +14,8 @@ class Bus:
         return len(self.passenger_list)
     
     def pick_up(self, person):
-        self.passenger_list.append(person)
+        if person.destination == self.destination:
+            self.passenger_list.append(person)
     
     def drop_off(self, person):
         self.passenger_list.remove(person)
